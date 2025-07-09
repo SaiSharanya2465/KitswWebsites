@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KITSW Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: 
+                linear-gradient(135deg, 
+                    rgba(255, 105, 180, 0.4) 0%, 
+                    rgba(255, 215, 0, 0.4) 50%, 
+                    rgba(0, 191, 255, 0.4) 100%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><text x="20" y="100" font-family="Arial" font-size="40" fill="rgba(255,105,180,0.15)">1/2</text><text x="120" y="60" font-family="Arial" font-size="40" fill="rgba(255,215,0,0.15)">3/4</text><text x="60" y="160" font-family="Arial" font-size="40" fill="rgba(0,191,255,0.15)">5/6</text></svg>');
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #2c3e50;
+            animation: gradientShift 15s ease infinite;
+            background-size: 400% 400%, 200px 200px;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 0%, 0 0; }
+            50% { background-position: 100% 100%, 100px 100px; }
+            100% { background-position: 0% 0%, 0 0; }
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.92);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            width: 450px;
+            padding: 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: linear-gradient(
+                45deg,
+                rgba(255, 105, 180, 0.3) 0%,
+                rgba(255, 215, 0, 0.3) 50%,
+                rgba(0, 191, 255, 0.3) 100%
+            );
+            z-index: -1;
+            border-radius: 30px;
+            animation: borderPulse 6s ease infinite;
+            filter: blur(20px);
+        }
+        
+        @keyframes borderPulse {
+            0% { opacity: 0.7; transform: scale(0.95); }
+            50% { opacity: 0.9; transform: scale(1); }
+            100% { opacity: 0.7; transform: scale(0.95); }
+        }
+        
+        .logo-container {
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 52px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff69b4 0%, #ffd700 50%, #00bfff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 5px 0;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+            letter-spacing: 1.5px;
+            animation: gradientShift 6s ease infinite;
+            background-size: 300% 300%;
+        }
+        
+        .established {
+            font-size: 20px;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group input:focus {
+            border-color: #00bfff;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(0, 191, 255, 0.3), inset 0 2px 4px rgba(0, 0, 0, 0.05);
+            background-color: white;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #ff69b4 0%, #ffd700 50%, #00bfff 100%);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 700;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            background-size: 300% auto;
+            animation: gradientButton 6s ease infinite;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0.3) 0%,
+                rgba(255, 255, 255, 0) 50%,
+                rgba(255, 255, 255, 0.3) 100%
+            );
+            transform: translateX(-100%);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            100% { transform: translateX(100%); }
+        }
+        
+        @keyframes gradientButton {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .register-link {
+            margin-top: 30px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .register-link a {
+            color: #00bfff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        
+        .register-link a:hover {
+            color: #ff69b4;
+            text-decoration: underline;
+        }
+        
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #ff69b4, #ffd700, #00bfff, transparent);
+            margin: 35px 0;
+            animation: dividerPulse 8s ease infinite;
+            background-size: 300% 100%;
+        }
+        
+        @keyframes dividerPulse {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-top: -15px;
+            margin-bottom: 20px;
+        }
+        
+        .forgot-password a {
+            color: #7f8c8d;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .forgot-password a:hover {
+            color: #00bfff;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo">KITSW</div>
+            <div class="established">Estd-1980</div>
+        </div>
+        
+        <h1>Student Login</h1>
+        
+        <div class="form-group">
+            <label for="email">Email or Roll Number</label>
+            <input type="text" id="email" placeholder="Enter your email or roll number">
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password">
+            <div class="forgot-password">
+                <a href="forgot-password.html">Forgot Password?</a>
+            </div>
+        </div>
+        
+        <button class="btn" onclick="window.location.href='landingcherry.html'">Login</button>
+        
+        <div class="divider"></div>
+        
+        <div class="register-link">
+            Don't have an account? <a href="registercherry.html">Register Now</a>
+        </div>
+    </div>
+</body>
+</html>
